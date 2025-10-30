@@ -1,7 +1,7 @@
 const roman = require("../src/roman");
 
 describe("Roman numeral converter", () => {
-  describe("Convert basic numerals into", () => {
+  describe("Convert basic numerals", () => {
     it("should convert I to 1", () => {
       expect(roman.romanToInt("I")).toBe(1);
     });
