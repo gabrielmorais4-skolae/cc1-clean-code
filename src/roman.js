@@ -8,9 +8,39 @@ const ROMAN_NUMERALS = {
   M: 1000,
 };
 
+const MAX_ROMAN_VALUE = 3999;
+
+class RomanError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "RomanError";
+  }
+}
+
 class Roman {
   constructor() {
     this.numerals = ROMAN_NUMERALS;
+    this.maxValue = MAX_ROMAN_VALUE;
+  }
+
+  handleEmptyInput(romanNumeral) {
+    if (!romanNumeral || romanNumeral.length === 0) {
+      throw new RomanError("Invalid Roman numeral");
+    }
+  }
+
+  handleInvalidCharacters(romanNumeral) {
+    for (let char of romanNumeral) {
+      if (this.numerals[char] === undefined) {
+        throw new RomanError("Invalid Roman numeral");
+      }
+    }
+  }
+
+  handleValueExceedingLimit(value) {
+    if (value > this.maxValue) {
+      throw new RomanError(`Roman numeral exceeds maximum value of ${this.maxValue}`);
+    }
   }
 
   resolveNumeralPair(currentValue, nextValue) {
@@ -25,15 +55,8 @@ class Roman {
   }
 
   romanToInt(romanNumeral) {
-    if (!romanNumeral || romanNumeral.length === 0) {
-      throw new Error("Invalid Roman numeral");
-    }
-
-    for (let char of romanNumeral) {
-      if (this.numerals[char] === undefined) {
-        throw new Error("Invalid Roman numeral");
-      }
-    }
+    this.handleEmptyInput(romanNumeral);
+    this.handleInvalidCharacters(romanNumeral);
 
     if (romanNumeral.length === 1) {
       return this.getNumeralValue(romanNumeral);
@@ -53,9 +76,7 @@ class Roman {
       }
     }
 
-    if (totalValue > 3999) {
-      throw new Error("Roman numeral exceeds maximum value of 3999");
-    }
+    this.handleValueExceedingLimit(totalValue);
 
     return totalValue;
   }
