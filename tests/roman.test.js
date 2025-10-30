@@ -31,7 +31,7 @@ describe("Roman numeral converter", () => {
     });
   });
 
-  describe("Convert numerals that need mathematical operations", () => {
+  describe("Convert numerals that need mathematical operations (subtraction)", () => {
     it("should convert IV to 4", () => {
       expect(roman.romanToInt("IV")).toBe(4);
     });
@@ -54,6 +54,44 @@ describe("Roman numeral converter", () => {
 
     it("should convert CM to 900", () => {
       expect(roman.romanToInt("CM")).toBe(900);
+    });
+  });
+
+  describe("Convert complex numerals", () => {
+    it("should convert XIII to 13", () => {
+      expect(roman.romanToInt("XIII")).toBe(13);
+    });
+
+    it("should convert XXVII to 27", () => {
+      expect(roman.romanToInt("XXVII")).toBe(27);
+    });
+
+    it("should convert XLIV to 44", () => {
+      expect(roman.romanToInt("XLIV")).toBe(44);
+    });
+
+    it("should convert LXIX to 69", () => {
+      expect(roman.romanToInt("LXIX")).toBe(69);
+    });
+
+    it("should convert XCIII to 93", () => {
+      expect(roman.romanToInt("XCIII")).toBe(93);
+    });
+
+    it("should convert CLX to 160", () => {
+      expect(roman.romanToInt("CLX")).toBe(160);
+    });
+
+    it("should convert CDXLIV to 444", () => {
+      expect(roman.romanToInt("CDXLIV")).toBe(444);
+    });
+
+    it("should convert DCCCXC to 890", () => {
+      expect(roman.romanToInt("DCCCXC")).toBe(890);
+    });
+
+    it("should convert MCMXCIV to 1994", () => {
+      expect(roman.romanToInt("MCMXCIV")).toBe(1994);
     });
   });
 });
