@@ -28,19 +28,21 @@ const roman = {
 
     let value = 0;
 
-    for (let i = 0; i < numeral.length - 1; i++) {
+    for (let i = 0; i < numeral.length; i++) {
       const current = this.simpleNumeralToInt(numeral[i]);
-
-      if (i === numeral.length - 2) {
-        const last = this.simpleNumeralToInt(numeral[i + 1]);
-        value += this.resolveNumeralPair(current, last);
-        break;
-      }
-
+      
       const next = this.simpleNumeralToInt(numeral[i + 1]);
 
-      value += this.resolveNumeralPair(current, next);
+      const resolvedValue = this.resolveNumeralPair(current, next);
+
+      value += resolvedValue;
+
+      if (current < next) {
+        i++;
+      }
     }
+
+    console.log(value);
 
     return value;
   },
