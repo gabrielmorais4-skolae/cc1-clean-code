@@ -25,6 +25,16 @@ class Roman {
   }
 
   romanToInt(romanNumeral) {
+    if (!romanNumeral || romanNumeral.length === 0) {
+      throw new Error("Invalid Roman numeral");
+    }
+
+    for (let char of romanNumeral) {
+      if (this.numerals[char] === undefined) {
+        throw new Error("Invalid Roman numeral");
+      }
+    }
+
     if (romanNumeral.length === 1) {
       return this.getNumeralValue(romanNumeral);
     }
@@ -41,6 +51,10 @@ class Roman {
       if (currentValue < nextValue) {
         i++;
       }
+    }
+
+    if (totalValue > 3999) {
+      throw new Error("Roman numeral exceeds maximum value of 3999");
     }
 
     return totalValue;
