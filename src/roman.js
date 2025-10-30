@@ -1,4 +1,4 @@
-const mappedNumerals = {
+const ROMAN_NUMERALS = {
   I: 1,
   V: 5,
   X: 10,
@@ -8,44 +8,43 @@ const mappedNumerals = {
   M: 1000,
 };
 
-const roman = {
-  resolveNumeralPair(current, next) {
-    if (current < next) {
-      return next - current;
-    } else {
-      return current;
+class Roman {
+  constructor() {
+    this.numerals = ROMAN_NUMERALS;
+  }
+
+  resolveNumeralPair(currentValue, nextValue) {
+    if (currentValue < nextValue) {
+      return nextValue - currentValue;
     }
-  },
+    return currentValue;
+  }
 
-  simpleNumeralToInt(numeral) {
-    return mappedNumerals[numeral] || 0;
-  },
+  getNumeralValue(numeral) {
+    return this.numerals[numeral] || 0;
+  }
 
-  romanToInt(numeral) {
-    if (numeral.length === 1) {
-      return this.simpleNumeralToInt(numeral);
+  romanToInt(romanNumeral) {
+    if (romanNumeral.length === 1) {
+      return this.getNumeralValue(romanNumeral);
     }
 
-    let value = 0;
+    let totalValue = 0;
 
-    for (let i = 0; i < numeral.length; i++) {
-      const current = this.simpleNumeralToInt(numeral[i]);
-      
-      const next = this.simpleNumeralToInt(numeral[i + 1]);
+    for (let i = 0; i < romanNumeral.length; i++) {
+      const currentValue = this.getNumeralValue(romanNumeral[i]);
+      const nextValue = this.getNumeralValue(romanNumeral[i + 1]);
 
-      const resolvedValue = this.resolveNumeralPair(current, next);
+      const resolvedValue = this.resolveNumeralPair(currentValue, nextValue);
+      totalValue += resolvedValue;
 
-      value += resolvedValue;
-
-      if (current < next) {
+      if (currentValue < nextValue) {
         i++;
       }
     }
 
-    console.log(value);
+    return totalValue;
+  }
+}
 
-    return value;
-  },
-};
-
-module.exports = roman;
+module.exports = Roman;
