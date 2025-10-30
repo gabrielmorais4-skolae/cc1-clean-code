@@ -1,4 +1,4 @@
-const mappedValues = {
+const mappedNumerals = {
   "I": 1,
   "V": 5,
   "X": 10,
@@ -10,7 +10,7 @@ const mappedValues = {
 
 const roman = {
   romanToInt(numeral) {
-    return mappedValues[numeral] || 0;
+    return mappedNumerals[numeral] || 0;
   },
 };
 
