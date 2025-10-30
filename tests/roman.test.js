@@ -30,4 +30,30 @@ describe("Roman numeral converter", () => {
       expect(roman.romanToInt("M")).toBe(1000);
     });
   });
+
+  describe("Convert numerals that need mathematical operations", () => {
+    it("should convert IV to 4", () => {
+      expect(roman.romanToInt("IV")).toBe(4);
+    });
+
+    it("should convert IX to 9", () => {
+      expect(roman.romanToInt("IX")).toBe(9);
+    });
+
+    it("should convert XL to 40", () => {
+      expect(roman.romanToInt("XL")).toBe(40);
+    });
+
+    it("should convert XC to 90", () => {
+      expect(roman.romanToInt("XC")).toBe(90);
+    });
+
+    it("should convert CD to 400", () => {
+      expect(roman.romanToInt("CD")).toBe(400);
+    });
+
+    it("should convert CM to 900", () => {
+      expect(roman.romanToInt("CM")).toBe(900);
+    });
+  });
 });
