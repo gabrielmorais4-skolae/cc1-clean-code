@@ -100,4 +100,18 @@ describe("Roman numeral converter", () => {
       expect(converter.romanToInt("MCMXCIV")).toBe(1994);
     });
   });
+
+  describe("Edge cases", () => {
+    it("should throw error for invalid numeral", () => {
+      expect(converter.romanToInt("A")).toThrow("Invalid Roman numeral");
+    });
+
+    it("should throw error for numeral exceeding 3999", () => {
+      expect(converter.romanToInt("MMMM")).toThrow("Value exceeds maximum limit of 3999");
+    });
+
+    it("should throw an error for empty string", () => {
+      expect(() => converter.romanToInt("")).toThrow("Invalid Roman numeral");
+    });
+  });
 });
